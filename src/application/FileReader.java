@@ -18,11 +18,11 @@ public class FileReader {
 		Scanner input=new Scanner(file);
 		String [] arguments;
 		while(input.hasNextLine()) {
-		  Image image;
+
 		  arguments=(input.nextLine()).split(",");
 		  Tile starter=null;
 		  if(arguments.length!=1) {
-			  
+			  Image image;
 			if(arguments[1].equals("Starter")){
 				if(arguments[2].equals("Vertical")) {
 					image=new Image("file:Starter1.png", 70, 70, false, false);
