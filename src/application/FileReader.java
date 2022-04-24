@@ -87,6 +87,7 @@ public class FileReader {
 					image=new Image("file:PipeStatic2.png", 70, 70, false, false);
 					pipeStatic=new PipeStatic(id, "Horizontal", new ImageView(new Image("file:PipeStatic2.png")));
 				}
+				
 				all_tiles.add(pipeStatic);
 			}
 			else if(arguments[1].equals("End")) {
