@@ -87,6 +87,22 @@ public class FileReader {
 					image=new Image("file:PipeStatic2.png", 70, 70, false, false);
 					pipeStatic=new PipeStatic(id, "Horizontal", new ImageView(new Image("file:PipeStatic2.png")));
 				}
+				else if(arguments[2].equals("00")) {
+					image=new Image("file:00.png", 70, 70, false, false);
+					pipeStatic=new PipeStatic(id, "00", new ImageView(new Image("file:Static00.png")));
+				}
+				else if(arguments[2].equals("01")) {
+					image=new Image("file:01.png", 70, 70, false, false);
+					pipeStatic=new PipeStatic(id, "01", new ImageView(new Image("file:Static01.png")));
+				}
+				else if(arguments[2].equals("10")) {
+					image=new Image("file:10.png", 70, 70, false ,false);
+					pipeStatic=new PipeStatic(id, "10", new ImageView(new Image("file:Static10.png")));
+				}
+				else if(arguments[2].equals("11")) {
+					image=new Image("file:11.png", 70, 70, false, false);
+					pipeStatic=new Pipe(id, "11", new ImageView(new Image("file:Static11.png")));
+				}
 				
 				all_tiles.add(pipeStatic);
 			}

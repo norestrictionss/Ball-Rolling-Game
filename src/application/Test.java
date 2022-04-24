@@ -35,7 +35,7 @@ public class Test extends Application {
 		Text totalMoveCounter = new Text("Total Moves : " + Tile.getTotalMoves());
 		totalMoveCounter.setTranslateX(250);
 		GridPane gridPane=new GridPane();
-		FileReader fileReader=new FileReader("CSE1242_spring2022_project_level4.txt");
+		FileReader fileReader=new FileReader("CSE1242_spring2022_project_level5.txt");
 		ArrayList<Tile> all_tiles=fileReader.start_reading();
 		BorderPane borderPane=new BorderPane();
 		borderPane.setBottom(totalMoveCounter);
