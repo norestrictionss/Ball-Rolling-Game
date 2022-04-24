@@ -9,12 +9,21 @@ public abstract class Tile {
 	private ImageView image;
 	private int rowIndex;
 	private int columnIndex;
+	private static int totalMoves = 0;
 	public Tile(int id, String property, ImageView image) {
 		this.setId(id);
 		this.setProperty(property);
 		this.setImage(image);
 	}
-	
+	public static void incrementTotalMoves(){
+		totalMoves++;
+	}
+	public static int getTotalMoves() {
+		return totalMoves;
+	}
+	public static void setTotalMoves(int totalMoves) {
+		Tile.totalMoves = totalMoves;
+	}
 	public int getId() {
 		return id;
 	}

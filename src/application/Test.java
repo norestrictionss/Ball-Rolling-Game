@@ -12,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.application.Application;
 public class Test extends Application {
@@ -31,30 +32,22 @@ public class Test extends Application {
 		Button level4=new Button("Level 4");
 		Button level5=new Button("Level 5");
 		Button level6=new Button("Level 6");
+		Text totalMoveCounter = new Text("Total Moves : " + Tile.getTotalMoves());
+		totalMoveCounter.setTranslateX(250);
 		GridPane gridPane=new GridPane();
 		FileReader fileReader=new FileReader("CSE1242_spring2022_project_level4.txt");
 		ArrayList<Tile> all_tiles=fileReader.start_reading();
 		BorderPane borderPane=new BorderPane();
-		BorderPane buttonPane=new BorderPane();
-		buttonPane.setCenter(level1);
-		buttonPane.setCenter(level2);
-		buttonPane.getChildren().add(level3);
-		buttonPane.getChildren().add(level4);
-		buttonPane.getChildren().add(level5);
-		buttonPane.getChildren().add(level6);
+		borderPane.setBottom(totalMoveCounter);
 		setGridPane(gridPane, all_tiles);
 		HBox hbox=new HBox(6);
 		hbox.getChildren().addAll(level1, level2, level3, level4, level5, level6);
-		buttonPane.setCenter(hbox);
-		// TODO Auto-generated method stub
 		hbox.setSpacing(55);
-		borderPane.setCenter(gridPane);
-		borderPane.setBottom(buttonPane);
+		borderPane.setTop(gridPane);
+		borderPane.setCenter(hbox);
 		Scene scene=new Scene(borderPane);
 		scene.setFill(javafx.scene.paint.Color.BLACK);
-		
 		gridPane.setOnMousePressed(e->{
-			
 			int columnIndex=(int) (e.getX()/150);
 			int rowIndex=(int) (e.getY()/150);
 			currentTileObject[0] = all_tiles.get(columnIndex + rowIndex * 4);
@@ -92,6 +85,8 @@ public class Test extends Application {
 				
 				all_tiles.set(otherColumn  + otherRow * 4, currentTile);
 				all_tiles.set(currentColumn + currentRow * 4, otherTile);
+				Tile.incrementTotalMoves();
+				totalMoveCounter.setText("Total Moves : " + Tile.getTotalMoves());
 			}
 			}
 			catch (Exception exception) {
