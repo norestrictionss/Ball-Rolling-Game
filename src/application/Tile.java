@@ -36,13 +36,13 @@ public abstract class Tile {
 	public int getRowIndex() {
 		return rowIndex;
 	}
-	public void setRowIndex(int rowIndex) {
+	protected void setRowIndex(int rowIndex) {
 		this.rowIndex = rowIndex;
 	}
 	public int getColumnIndex() {
 		return columnIndex;
 	}
-	public void setColumnIndex(int columnIndex) {
+	protected void setColumnIndex(int columnIndex) {
 		this.columnIndex = columnIndex;
 	}
 

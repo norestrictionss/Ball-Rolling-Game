@@ -22,7 +22,9 @@ public class Test extends Application {
 	}
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Pane mainPane=new Pane();
+		Tile[] currentTileObject = new Tile[1];
+		int[] currentTileGrid = new int[4];
+ 		Pane mainPane=new Pane();
 		Button level1=new Button("Level 1");
 		Button level2=new Button("Level 2");
 		Button level3=new Button("Level 3");
@@ -53,10 +55,53 @@ public class Test extends Application {
 		
 		gridPane.setOnMousePressed(e->{
 			
-			int rowIndex=(int) (e.getY()/150);
 			int columnIndex=(int) (e.getX()/150);
+			int rowIndex=(int) (e.getY()/150);
+			currentTileObject[0] = all_tiles.get(columnIndex + rowIndex * 4);
+			currentTileGrid[0] = rowIndex;
+			currentTileGrid[1] = columnIndex;
+			currentTileGrid[2] = (int)e.getX();
+			currentTileGrid[3] = (int)e.getY();	
+		});
+		borderPane.setOnMouseDragged(e->{
+			Tile currentTile = currentTileObject[0];
+			if(currentTile instanceof Movable) {
+			currentTile.getImage().setTranslateX(e.getX() - currentTileGrid[2]);
+			currentTile.getImage().setTranslateY(e.getY() - currentTileGrid[3]);
+			}
+		});
+		gridPane.setOnMouseReleased(e->{
+			try {
+			int currentRow = currentTileGrid[0];
+			int currentColumn = currentTileGrid[1];
+			int otherRow = (int)(e.getY() / 150);
+			int otherColumn = (int)(e.getX() / 150);
+			int rowDifference = currentRow - otherRow;
+			int columnDifference = currentColumn - otherColumn;
+			Tile otherTile = all_tiles.get(otherColumn + otherRow * 4);
+			Tile currentTile = currentTileObject[0];
 			
-			move_block(gridPane, rowIndex, columnIndex, all_tiles);
+			if(otherTile instanceof Free && currentTile instanceof Movable && (((currentColumn == otherColumn) && (rowDifference == -1 || rowDifference == 1)) ||
+					((currentRow == otherRow) && (columnDifference == -1 || columnDifference == 1)))) {
+				System.out.println(currentColumn + " " + currentRow + " " + otherColumn + " " + otherRow);
+				/*Could also update the gridpane accordingly but no reason to do it...*/
+				currentTile.getImage().setTranslateX(0);
+				currentTile.getImage().setTranslateY(0);
+				GridPane.setColumnIndex(otherTile.getImage(),currentColumn);
+				GridPane.setRowIndex(otherTile.getImage(),currentRow);
+				GridPane.setColumnIndex(currentTile.getImage(),otherColumn);		
+				GridPane.setRowIndex(currentTile.getImage(),otherRow);
+				
+				all_tiles.set(otherColumn  + otherRow * 4, currentTile);
+				all_tiles.set(currentColumn + currentRow * 4, otherTile);
+			}
+			}
+			catch (Exception exception) {
+			}
+			finally {
+			currentTileObject[0].getImage().setTranslateX(0);
+			currentTileObject[0].getImage().setTranslateY(0);
+			}
 		});
 		
 		primaryStage.setScene(scene);
@@ -64,76 +109,21 @@ public class Test extends Application {
 	}
 	public void setGridPane(GridPane gridPane, ArrayList<Tile> tiles) throws FileNotFoundException {
 		for(int i=0;i<tiles.size();i++) {
-			tiles.get(i).setColumnIndex(i%4);
-			tiles.get(i).setRowIndex((i/4));
+			tiles.get(i).setColumnIndex(i/4);
+			tiles.get(i).setRowIndex((i%4));
 			
 			gridPane.add(tiles.get(i).getImage(), i %4, i/4);
 		}
 		
 	}
-	public void move_block(GridPane gridPane, int rowIndex, int columnIndex, ArrayList<Tile> all_tiles) {
-		all_tiles.get(columnIndex+4*rowIndex).getImage().setOnMouseDragged(e->{
-			Tile tile1=all_tiles.get(rowIndex*4+columnIndex);
-			
-			System.out.println(rowIndex+" "+columnIndex);
-			if(isRight(all_tiles, rowIndex*4+columnIndex) &&
-					e.getX()>150 && e.getX()<300 && e.getY()>0 && e.getY()<150
-				&& !(all_tiles.get(rowIndex*4+columnIndex) instanceof PipeStatic
-						|| all_tiles.get(rowIndex*4+columnIndex) instanceof End ||
-						all_tiles.get(rowIndex*4+columnIndex) instanceof Starter)) {
-				Tile tile2=all_tiles.get(4*rowIndex+columnIndex+1);
-			
-				GridPane.setColumnIndex(tile1.getImage(), columnIndex+1);
-				GridPane.setRowIndex(tile1.getImage(), rowIndex);
-				GridPane.setColumnIndex(tile2.getImage(), columnIndex);
-				GridPane.setRowIndex(tile2.getImage(), rowIndex); 
-				all_tiles.set(4*rowIndex+columnIndex+1, tile1);
-				all_tiles.set(4*rowIndex+columnIndex, tile2);	
-			}
-			
-			else if(isLeft(all_tiles, rowIndex*4+columnIndex) &&
-					e.getX()>-150 && e.getX()<0 && e.getY()>0 && e.getY()<150
-					&& !(all_tiles.get(rowIndex*4+columnIndex) instanceof PipeStatic ||
-							all_tiles.get(rowIndex*4+columnIndex) instanceof End 
-							|| all_tiles.get(rowIndex*4+columnIndex) instanceof Starter)) {
-				Tile tile2=all_tiles.get(4*rowIndex+columnIndex-1);
-				
-				GridPane.setColumnIndex(tile1.getImage(), columnIndex-1);
-				GridPane.setRowIndex(tile1.getImage(), rowIndex);
-				GridPane.setColumnIndex(tile2.getImage(), columnIndex);
-				GridPane.setRowIndex(tile2.getImage(), rowIndex);
-				all_tiles.set(4*rowIndex+columnIndex-1, tile1);
-				all_tiles.set(4*rowIndex+columnIndex, tile2);
-		
-			}
-			else if(isDown(all_tiles, rowIndex*4+columnIndex) &&
-					e.getX()<150 && e.getX()>0 && e.getY()>150 && e.getY()<300
-					&& !(all_tiles.get(rowIndex*4+columnIndex) instanceof PipeStatic
-						|| all_tiles.get(rowIndex*4+columnIndex) instanceof End
-						|| all_tiles.get(rowIndex*4+columnIndex) instanceof Starter)) {
-				
-				Tile tile2=all_tiles.get(4*(rowIndex+1)+columnIndex);
-				GridPane.setColumnIndex(tile1.getImage(), columnIndex);
-				GridPane.setRowIndex(tile1.getImage(), rowIndex+1);
-				GridPane.setColumnIndex(tile2.getImage(), columnIndex);
-				GridPane.setRowIndex(tile2.getImage(), rowIndex);
-				all_tiles.set(4*(rowIndex+1)+columnIndex, tile1);
-				all_tiles.set(4*rowIndex+columnIndex, tile2);
-			}
-			else if(isUp(all_tiles, rowIndex*4+columnIndex) &&
-					e.getX()>0 && e.getX()<150 && e.getY()<0 && e.getY()>-150
-					&& !(all_tiles.get(rowIndex*4+columnIndex) instanceof PipeStatic
-						 || all_tiles.get(rowIndex*4+columnIndex) instanceof End)) {
-				Tile tile2=all_tiles.get(4*(rowIndex-1)+columnIndex);
-				GridPane.setColumnIndex(tile1.getImage(), columnIndex);
-				GridPane.setRowIndex(tile1.getImage(), rowIndex-1);
-				GridPane.setColumnIndex(tile2.getImage(), columnIndex);
-				GridPane.setRowIndex(tile2.getImage(), rowIndex);
-				all_tiles.set(4*(rowIndex-1)+columnIndex, tile1);
-				all_tiles.set(4*rowIndex+columnIndex, tile2);
-			}
-		});
+	public boolean canMove(Tile currentTile,Tile otherTile,boolean isTilesAdjacent) {
+		if(otherTile instanceof Free) {
+			return isTilesAdjacent;	
+		}
+		else return false;
 	}
+
+	
 	public Tile findTile(ArrayList<Tile> all_tiles, int columnIndex, int rowIndex) {
 		for(int i=0;i<all_tiles.size();i++) {
 			if(all_tiles.get(i).getRowIndex()==rowIndex && 
