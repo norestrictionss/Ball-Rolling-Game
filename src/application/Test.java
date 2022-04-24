@@ -32,7 +32,7 @@ public class Test extends Application {
 		Button level5=new Button("Level 5");
 		Button level6=new Button("Level 6");
 		GridPane gridPane=new GridPane();
-		FileReader fileReader=new FileReader("CSE1242_spring2022_project_level5.txt");
+		FileReader fileReader=new FileReader("CSE1242_spring2022_project_level4.txt");
 		ArrayList<Tile> all_tiles=fileReader.start_reading();
 		BorderPane borderPane=new BorderPane();
 		BorderPane buttonPane=new BorderPane();
@@ -83,7 +83,6 @@ public class Test extends Application {
 			
 			if(otherTile instanceof Free && currentTile instanceof Movable && (((currentColumn == otherColumn) && (rowDifference == -1 || rowDifference == 1)) ||
 					((currentRow == otherRow) && (columnDifference == -1 || columnDifference == 1)))) {
-				System.out.println(currentColumn + " " + currentRow + " " + otherColumn + " " + otherRow);
 				currentTile.getImage().setTranslateX(0);
 				currentTile.getImage().setTranslateY(0);
 				GridPane.setColumnIndex(otherTile.getImage(),currentColumn);
@@ -113,68 +112,5 @@ public class Test extends Application {
 			
 			gridPane.add(tiles.get(i).getImage(), i %4, i/4);
 		}
-		
-	}
-
-	
-	public Tile findTile(ArrayList<Tile> all_tiles, int columnIndex, int rowIndex) {
-		for(int i=0;i<all_tiles.size();i++) {
-			if(all_tiles.get(i).getRowIndex()==rowIndex && 
-					all_tiles.get(i).getColumnIndex()==columnIndex)
-				return all_tiles.get(i);
-		}
-		return null;
-	}
-	public boolean isRight(ArrayList<Tile> all_tiles, int index) {
-		Tile tile=null;
-		for(int j=0;j<all_tiles.size();j++) {
-			if(GridPane.getRowIndex(all_tiles.get(j).getImage())*4+
-				GridPane.getColumnIndex(all_tiles.get(j).getImage())==index+1) {
-					tile=all_tiles.get(j);
-			}
-		}
-		if(tile instanceof Free)
-			return true;
-		return false;
-	}
-	public boolean isLeft(ArrayList<Tile> all_tiles, int index) {
-		Tile tile=null;
-		
-		for(int j=0;j<all_tiles.size();j++) {
-			
-			if(GridPane.getRowIndex(all_tiles.get(j).getImage())*4+
-			   GridPane.getColumnIndex(all_tiles.get(j).getImage())==index-1) {
-					tile=all_tiles.get(j);
-			}
-		}
-		if(tile instanceof Free)
-			return true;
-		return false;
-	}
-	public boolean isUp(ArrayList<Tile> all_tiles, int index) {
-		Tile tile=null;
-		
-		for(int j=0;j<all_tiles.size();j++) {
-			if(GridPane.getColumnIndex(all_tiles.get(j).getImage())+
-			   GridPane.getRowIndex(all_tiles.get(j).getImage())*4==index-4) {
-					tile=all_tiles.get(j);
-			}
-		}
-		if(tile instanceof Free)
-			return true;
-		return false;
-	}
-	public boolean isDown(ArrayList<Tile> all_tiles, int index) {
-		Tile tile=null;
-		for(int j=0;j<all_tiles.size();j++) {
-
-			if(GridPane.getColumnIndex(all_tiles.get(j).getImage())+
-			   GridPane.getRowIndex(all_tiles.get(j).getImage())*4==index+4) {
-					tile=all_tiles.get(j);
-			}
-		}
-		if(tile instanceof Free)
-			return true;
-		return false;
-	}
+	}		
 }
