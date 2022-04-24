@@ -18,9 +18,8 @@
 
 10,Pipe,Vertical
 
-
-
 11,Pipe,Horizontal
+
 12,Empty,none
 
 13,Empty,Free

@@ -32,7 +32,7 @@ public class Test extends Application {
 		Button level5=new Button("Level 5");
 		Button level6=new Button("Level 6");
 		GridPane gridPane=new GridPane();
-		FileReader fileReader=new FileReader("CSE1242_spring2022_project_level4.txt");
+		FileReader fileReader=new FileReader("CSE1242_spring2022_project_level5.txt");
 		ArrayList<Tile> all_tiles=fileReader.start_reading();
 		BorderPane borderPane=new BorderPane();
 		BorderPane buttonPane=new BorderPane();
@@ -84,7 +84,6 @@ public class Test extends Application {
 			if(otherTile instanceof Free && currentTile instanceof Movable && (((currentColumn == otherColumn) && (rowDifference == -1 || rowDifference == 1)) ||
 					((currentRow == otherRow) && (columnDifference == -1 || columnDifference == 1)))) {
 				System.out.println(currentColumn + " " + currentRow + " " + otherColumn + " " + otherRow);
-				/*Could also update the gridpane accordingly but no reason to do it...*/
 				currentTile.getImage().setTranslateX(0);
 				currentTile.getImage().setTranslateY(0);
 				GridPane.setColumnIndex(otherTile.getImage(),currentColumn);
@@ -115,12 +114,6 @@ public class Test extends Application {
 			gridPane.add(tiles.get(i).getImage(), i %4, i/4);
 		}
 		
-	}
-	public boolean canMove(Tile currentTile,Tile otherTile,boolean isTilesAdjacent) {
-		if(otherTile instanceof Free) {
-			return isTilesAdjacent;	
-		}
-		else return false;
 	}
 
 	
