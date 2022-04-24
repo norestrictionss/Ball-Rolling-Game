@@ -1,4 +1,4 @@
-package application;
+
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -25,6 +25,8 @@ public class Test extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		Tile[] currentTileObject = new Tile[1];
 		int[] currentTileGrid = new int[4];
+		Tile.setTotalMoves(0);
+	
  		Pane mainPane=new Pane();
 		Button level1=new Button("Level 1");
 		Button level2=new Button("Level 2");
