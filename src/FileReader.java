@@ -26,11 +26,11 @@ public class FileReader {
 			if(arguments[1].equals("Starter")){
 				if(arguments[2].equals("Vertical")) {
 					image=new Image("file:Starter1.png", 70, 70, false, false);
-					starter=new Starter(id, "Starter", new ImageView(new Image("file:Starter1.png")));
+					starter=new Starter(id, "Vertical", new ImageView(new Image("file:Starter1.png")));
 				}
 				else if(arguments[2].equals("Horizontal")) {
 					image=new Image("file:Starter2.png", 70, 70, false, false);
-					starter=new Starter(id, "Starter", new ImageView(new Image("file:Starter2.png")));
+					starter=new Starter(id, "Horizontal", new ImageView(new Image("file:Starter2.png")));
 				}
 				all_tiles.add(starter);
 				
