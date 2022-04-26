@@ -25,9 +25,8 @@ public class Test extends Application {
 		private static Stage actualStage = null;
 		private static Button previousLevel = new Button("Previous Level");
 		private static Button nextLevel = new Button("Next Level");
-		public static Stage getGameStage() {
-			return actualStage;
-		}
+		PathTransition circlePathTransition = new PathTransition();
+		
 	public static void main(String[] args) throws FileNotFoundException {
 		// TODO Auto-generated method stub
 		Application.launch(args);
@@ -118,14 +117,16 @@ public class Test extends Application {
 							isFinished[0] = true;
 							if(currentLevel.getLevelsFinished() + 1 == currentLevel.getId())
 							currentLevel.incrementLevelsFinished();
-							PathTransition newCirclePathTransition = new PathTransition();
-							newCirclePathTransition.setPath(CircleAnimation.returnCirclePath(currentPathTileArray,all_tiles));
-							newCirclePathTransition.setNode(gameCircle);
-							newCirclePathTransition.setCycleCount(1);
-							newCirclePathTransition.setDuration(Duration.seconds(((Path)newCirclePathTransition.getPath()).getElements().size() / BALL_SPEED));
-							newCirclePathTransition.autoReverseProperty();
-							newCirclePathTransition.play();
-						
+							circlePathTransition = new PathTransition();
+							circlePathTransition.setPath(CircleAnimation.returnCirclePath(currentPathTileArray,all_tiles));
+							circlePathTransition.setNode(gameCircle);
+							circlePathTransition.setCycleCount(1);
+							circlePathTransition.setDuration(Duration.seconds(((Path)circlePathTransition.getPath()).getElements().size() / BALL_SPEED));
+							circlePathTransition.autoReverseProperty();
+							circlePathTransition.play();
+							circlePathTransition.setOnFinished(event->{
+								Main.getToNextLevel();
+							});
 				}
 						
 			}
@@ -146,6 +147,12 @@ public class Test extends Application {
 	}
 	public static void setLevel(Level currentLevel) {
 		Test.currentLevel = currentLevel;
+	}
+	public void stopAnimation() {
+		circlePathTransition.pause();
+	}
+	public static Stage getGameStage() {
+		return actualStage;
 	}
 	public void setGridPane(GridPane gridPane, ArrayList<Tile> tiles) throws FileNotFoundException {
 		for(int i=0;i<tiles.size();i++) {

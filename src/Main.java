@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 
 public class Main extends Application {
 	
-	private Level currentLevel = new Level(1);
+	private static Level currentLevel = new Level(1);
 	@Override
 	public void start(Stage primaryStage) throws FileNotFoundException {
 		Stage mainStage;
@@ -33,6 +33,7 @@ public class Main extends Application {
 				try {
 				currentLevel.decrementId();	
 				gameTest.start(Test.getGameStage());
+				gameTest.stopAnimation();
 				}
 				catch(Exception epic) {
 					
@@ -41,8 +42,9 @@ public class Main extends Application {
 		});
 		nextLevel.setOnAction(e->{
 			try {
-
+				
 			if(currentLevel.getId() < currentLevel.getTotalLevels() && currentLevel.getId() <= currentLevel.getLevelsFinished()) {
+				gameTest.stopAnimation();
 				currentLevel.incrementId();
 				gameTest.start(Test.getGameStage());			
 			}
@@ -52,7 +54,19 @@ public class Main extends Application {
 			}
 		});
 	}
-	
+	public static void getToNextLevel() {
+		try {
+			if(currentLevel.getId() < currentLevel.getTotalLevels() && currentLevel.getId() <= currentLevel.getLevelsFinished()) {
+			Test newGame = new Test();
+			currentLevel.incrementId();
+			newGame.stopAnimation();
+			newGame.start(Test.getGameStage());	
+		}
+		}
+		catch (Exception exception) {
+			
+		}
+	}
 	public static void main(String[] args) {
 		launch(args);
 	}
