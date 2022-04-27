@@ -58,7 +58,6 @@ public class Main extends Application {
 		try {
 			if(currentLevel.getId() < currentLevel.getTotalLevels() && currentLevel.getId() <= currentLevel.getLevelsFinished()) {
 			Test newGame = new Test();
-			if(currentLevel.getLevelsFinished() == currentLevel.getId())
 			currentLevel.incrementId();
 			newGame.stopAnimation();
 			newGame.start(Test.getGameStage());	

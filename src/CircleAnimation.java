@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-
 import javafx.scene.shape.*;
 
 public class CircleAnimation {
