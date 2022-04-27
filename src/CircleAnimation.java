@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 
-import javafx.scene.layout.GridPane;
 import javafx.scene.shape.*;
 
 public class CircleAnimation {

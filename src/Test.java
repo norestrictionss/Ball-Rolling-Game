@@ -11,7 +11,6 @@ import javafx.scene.layout.BorderPane;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Path;
@@ -28,7 +27,6 @@ public class Test extends Application {
 		PathTransition circlePathTransition = new PathTransition();
 		
 	public static void main(String[] args) throws FileNotFoundException {
-		// TODO Auto-generated method stub
 		Application.launch(args);
 	}
 	@Override
@@ -43,7 +41,6 @@ public class Test extends Application {
 		gameCircle.setFill(Color.YELLOW);
 		gameCircle.setStroke(Color.BLACK);
 		gameCircle.setRadius(18);
- 		Pane mainPane=new Pane();
 		previousLevel.setTranslateX(170);
 		nextLevel.setTranslateX(230);
 		Text totalMoveCounter = new Text("Total Moves : " + Tile.getTotalMoves());
