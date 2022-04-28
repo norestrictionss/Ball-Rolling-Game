@@ -19,22 +19,37 @@ public class CircleAnimation {
 				case "1" : 
 				case "2" : 
 					break;
-				case "01" : startingDirection = 5 - startingDirection;
-					isArcPositive = false;
-					break;
-				case "10" : startingDirection = 5 - startingDirection;
-					isArcPositive = true ;
-					break;
-				case "11" : if(startingDirection == 3)
-					
-					startingDirection = 4;
-				else startingDirection = 3;
-				isArcPositive = true;
-					break;
-				case "00" : if(startingDirection == 1)
+				case "01" :if (startingDirection == 3) {
 					startingDirection = 2;
-				else startingDirection = 1;
+					isArcPositive = false;
+				}
+				else { startingDirection = 1;
+				isArcPositive = true;
+				}
+					break;
+				case "10" :  if(startingDirection == 1) {
+					startingDirection = 4;
+					isArcPositive = false ;
+				}
+				else {startingDirection = 3;
+				isArcPositive = true;
+				}
+					break;
+				case "11" : if(startingDirection == 1) {
+					startingDirection = 2;
+					isArcPositive = true ;
+				}
+				else {startingDirection = 3;
 				isArcPositive = false;
+				}
+					break;
+				case "00" : if(startingDirection == 2) {
+					startingDirection = 1;
+					isArcPositive = false ;
+				}
+				else {startingDirection = 4;
+				isArcPositive = true;
+				}
 					break;
 			}
 			currentPathElement = findTilePath(currentTile,startingDirection,currentTileString.length(),isArcPositive,all_tiles);
@@ -62,8 +77,7 @@ public class CircleAnimation {
 			if(length == 2)
 				return new ArcTo(75,75,0,150 * (currentIndex % 4) + coordinates[0],150 * (currentIndex / 4) + coordinates[1],false,sweepFlag);
 			else 
-			
-			return new LineTo(150 * (currentIndex % 4) + coordinates[0],150 * (currentIndex / 4) + coordinates[1]);
+				return new LineTo(150 * (currentIndex % 4) + coordinates[0],150 * (currentIndex / 4) + coordinates[1]);
 		
 	}
 	public static String findDirectionString(Tile tile) {

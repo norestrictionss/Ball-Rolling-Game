@@ -1,7 +1,7 @@
 
 public class Level {
 	private int id;
-	private final int TOTAL_LEVELS = 5;
+	private final int TOTAL_LEVELS = 15;
 	private int levelsFinished = 0;
 	public Level(int id) {
 		this.id = id;

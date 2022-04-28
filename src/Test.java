@@ -16,15 +16,11 @@ import javafx.util.Duration;
 import javafx.animation.PathTransition;
 import javafx.application.Application;
 public class Test extends Application {
-		private static Level currentLevel = new Level(1);
+		private static Level currentLevel;
 		private static Stage actualStage = null;
 		private static Button previousLevel = new Button("Previous Level");
 		private static Button nextLevel = new Button("Next Level");
 		PathTransition circlePathTransition = new PathTransition();
-		
-	public static void main(String[] args) throws FileNotFoundException {
-		Application.launch(args);
-	}
 	@Override
 	public void start(Stage primaryStage) throws FileNotFoundException {
 		actualStage = primaryStage;
@@ -40,7 +36,7 @@ public class Test extends Application {
 		previousLevel.setTranslateX(170);
 		nextLevel.setTranslateX(230);
 		Text totalMoveCounter = new Text("Total Moves : " + Tile.getTotalMoves());
-		totalMoveCounter.setTranslateX(0);
+		totalMoveCounter.setTranslateX(260);
 		GridPane gridPane=new GridPane();
 		FileReader fileReader=new FileReader("CSE1242_spring2022_project_level" + currentLevel.getId() + ".txt");
 		ArrayList<Tile> all_tiles=fileReader.start_reading();
@@ -54,11 +50,13 @@ public class Test extends Application {
 		HBox hbox=new HBox(2);
 		hbox.getChildren().addAll(previousLevel,nextLevel);
 		hbox.setSpacing(0);
+		borderPane.setStyle("-fx-background-color: #000000;");
+		totalMoveCounter.setStroke(Color.WHITE);
 		borderPane.setTop(gridPane);
 		borderPane.setCenter(hbox);
 		Scene scene=new Scene(borderPane);
 		borderPane.getChildren().add(gameCircle);
-		scene.setFill(javafx.scene.paint.Color.BLACK);
+		
 		gridPane.setOnMousePressed(e->{
 			if(isFinished[0] == false) {
 				int columnIndex=(int) (e.getX()/150);
@@ -105,11 +103,11 @@ public class Test extends Application {
 					Tile.incrementTotalMoves();
 					totalMoveCounter.setText("Total Moves : " + Tile.getTotalMoves());
 					ArrayList<Tile> currentPathTileArray = CheckPath.generatePath(all_tiles);
-					System.out.println(currentPathTileArray);
 						if(currentPathTileArray != null) {
 							isFinished[0] = true;
 							if(currentLevel.getLevelsFinished() + 1 == currentLevel.getId())
 							currentLevel.incrementLevelsFinished();
+							
 							circlePathTransition = new PathTransition();
 							circlePathTransition.setPath(CircleAnimation.returnCirclePath(currentPathTileArray,all_tiles));
 							circlePathTransition.setNode(gameCircle);
@@ -136,7 +134,7 @@ public class Test extends Application {
 		});
 		actualStage.setResizable(false);
 		actualStage.setScene(scene);
-		actualStage.show();
+
 	}
 	public static void setLevel(Level currentLevel) {
 		Test.currentLevel = currentLevel;
