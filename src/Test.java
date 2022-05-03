@@ -20,22 +20,23 @@ public class Test extends Application {
 		private static Stage actualStage = null;
 		private static Button previousLevel = new Button("Previous Level");
 		private static Button nextLevel = new Button("Next Level");
+		private static Button returnToMainMenu;
 		PathTransition circlePathTransition = new PathTransition();
 	@Override
 	public void start(Stage primaryStage) throws FileNotFoundException {
+		try {
 		actualStage = primaryStage;
 		final double BALL_SPEED = 1; /*In terms of tile/second */
 		Tile[] currentTileObject = new Tile[1];
 		int[] currentTileGrid = new int[4];
 		boolean[] isFinished = {false};
-		Tile.setTotalMoves(0);
 		Circle gameCircle = new Circle();
 		gameCircle.setFill(Color.YELLOW);
 		gameCircle.setStroke(Color.BLACK);
 		gameCircle.setRadius(18);
 		previousLevel.setTranslateX(170);
 		nextLevel.setTranslateX(230);
-		Text totalMoveCounter = new Text("Total Moves : " + Tile.getTotalMoves());
+		Text totalMoveCounter = new Text("Total Moves : " + currentLevel.getCounterFor(currentLevel.getId()));
 		totalMoveCounter.setTranslateX(260);
 		GridPane gridPane=new GridPane();
 		FileReader fileReader=new FileReader("CSE1242_spring2022_project_level" + currentLevel.getId() + ".txt");
@@ -48,7 +49,7 @@ public class Test extends Application {
 		setGridPane(gridPane, all_tiles);
 		gridPane.getChildren().add(gameCircle);
 		HBox hbox=new HBox(2);
-		hbox.getChildren().addAll(previousLevel,nextLevel);
+		hbox.getChildren().addAll(previousLevel,nextLevel,returnToMainMenu);
 		hbox.setSpacing(0);
 		borderPane.setStyle("-fx-background-color: #000000;");
 		totalMoveCounter.setStroke(Color.WHITE);
@@ -99,15 +100,13 @@ public class Test extends Application {
 					GridPane.setColumnIndex(currentTile.getImage(),otherColumn);		
 					GridPane.setRowIndex(currentTile.getImage(),otherRow);
 					all_tiles.set(otherColumn  + otherRow * 4, currentTile);
-					all_tiles.set(currentColumn + currentRow * 4, otherTile);
-					Tile.incrementTotalMoves();
-					totalMoveCounter.setText("Total Moves : " + Tile.getTotalMoves());
+					all_tiles.set(currentColumn + currentRow * 4, otherTile);			
+					totalMoveCounter.setText("Total Moves : " + currentLevel.incrementCounterFor(currentLevel.getId()));
 					ArrayList<Tile> currentPathTileArray = CheckPath.generatePath(all_tiles);
 						if(currentPathTileArray != null) {
 							isFinished[0] = true;
 							if(currentLevel.getLevelsFinished() + 1 == currentLevel.getId())
 							currentLevel.incrementLevelsFinished();
-							
 							circlePathTransition = new PathTransition();
 							circlePathTransition.setPath(CircleAnimation.returnCirclePath(currentPathTileArray,all_tiles));
 							circlePathTransition.setNode(gameCircle);
@@ -134,7 +133,10 @@ public class Test extends Application {
 		});
 		actualStage.setResizable(false);
 		actualStage.setScene(scene);
-
+		}
+		catch(Exception ex) {
+			
+		}
 	}
 	public static void setLevel(Level currentLevel) {
 		Test.currentLevel = currentLevel;
@@ -144,6 +146,9 @@ public class Test extends Application {
 	}
 	public static Stage getGameStage() {
 		return actualStage;
+	}
+	protected static void setReturnToMainMenu(Button returnToMainMenu) {
+		Test.returnToMainMenu = returnToMainMenu;
 	}
 	public void setGridPane(GridPane gridPane, ArrayList<Tile> tiles) throws FileNotFoundException {
 		for(int i=0;i<tiles.size();i++) {

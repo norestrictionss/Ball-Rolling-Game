@@ -13,6 +13,7 @@ public class FileReader {
 	public FileReader(String file_name) {
 		this.file=new File(file_name);
 	}
+	
 	public ArrayList<Tile> start_reading() throws FileNotFoundException{
 		int id=1;
 		Scanner input=new Scanner(file);
@@ -106,3 +107,4 @@ public class FileReader {
 		return all_tiles;
 	}
 }
+

@@ -7,7 +7,6 @@ public class CheckPath {
 		Tile currentTile;
 		int i=findStarterIndex(all_tiles);
 		while(!(path.get(path.size()-1) instanceof End)) {
-			System.out.println(path);
 				currentTile = all_tiles.get(i);
 				if(i>=4 && (currentTile.getProperty().equals("Vertical") || currentTile.getProperty().equals("00") || 
                 currentTile.getProperty().equals("01")) && 
