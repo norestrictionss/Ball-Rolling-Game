@@ -4,8 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 
 public class FileReader {
 	public ArrayList<Tile> all_tiles=new ArrayList<>();
@@ -13,7 +19,19 @@ public class FileReader {
 	public FileReader(String file_name) {
 		this.file=new File(file_name);
 	}
-	
+	public static Circle getBall() {
+		Circle ballTemplate = new Circle();
+		ImagePattern gameBall = new ImagePattern(new Image("file:ball.png"));
+		ballTemplate.setFill(gameBall);
+		ballTemplate.setRadius(18);
+		ballTemplate.setEffect(new DropShadow(10,Color.BLACK));
+		ballTemplate.setStroke(Color.BLACK);
+		
+		return ballTemplate;
+	}
+	public static ImageView getBackground() {
+		return new ImageView(new Image("file:Background.png",400,400,true,true));
+	}
 	public ArrayList<Tile> start_reading() throws FileNotFoundException{
 		int id=1;
 		Scanner input=new Scanner(file);

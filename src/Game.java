@@ -2,8 +2,14 @@
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+
+
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -15,7 +21,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.animation.PathTransition;
 import javafx.application.Application;
-public class Test extends Application {
+public class Game extends Application {
 		private static Level currentLevel;
 		private static Stage actualStage = null;
 		private static Button previousLevel = new Button("Previous Level");
@@ -29,25 +35,24 @@ public class Test extends Application {
 		final double BALL_SPEED = 1; /*In terms of tile/second */
 		Tile[] currentTileObject = new Tile[1];
 		int[] currentTileGrid = new int[4];
-		boolean[] isFinished = {false};
-		Circle gameCircle = new Circle();
-		gameCircle.setFill(Color.YELLOW);
-		gameCircle.setStroke(Color.BLACK);
-		gameCircle.setRadius(18);
+		boolean[] isFinished = {false};		
+		
 		previousLevel.setTranslateX(170);
 		nextLevel.setTranslateX(230);
 		Text totalMoveCounter = new Text("Total Moves : " + currentLevel.getCounterFor(currentLevel.getId()));
 		totalMoveCounter.setTranslateX(260);
 		GridPane gridPane=new GridPane();
 		FileReader fileReader=new FileReader("CSE1242_spring2022_project_level" + currentLevel.getId() + ".txt");
+		Circle gameBall = FileReader.getBall();
 		ArrayList<Tile> all_tiles=fileReader.start_reading();
 		int startingTileIndex = CheckPath.findStarterIndex(all_tiles);
-		gameCircle.setCenterX((startingTileIndex % 4)* 150 + 72);
-		gameCircle.setCenterY((startingTileIndex / 4)* 150 + 75);
+		
+		gameBall.setCenterX((startingTileIndex % 4)* 150 + 72);
+		gameBall.setCenterY((startingTileIndex / 4)* 150 + 78);
 		BorderPane borderPane=new BorderPane();
 		borderPane.setBottom(totalMoveCounter);
 		setGridPane(gridPane, all_tiles);
-		gridPane.getChildren().add(gameCircle);
+		gridPane.getChildren().add(gameBall);
 		HBox hbox=new HBox(2);
 		hbox.getChildren().addAll(previousLevel,nextLevel,returnToMainMenu);
 		hbox.setSpacing(0);
@@ -56,7 +61,7 @@ public class Test extends Application {
 		borderPane.setTop(gridPane);
 		borderPane.setCenter(hbox);
 		Scene scene=new Scene(borderPane);
-		borderPane.getChildren().add(gameCircle);
+		borderPane.getChildren().add(gameBall);
 		
 		gridPane.setOnMousePressed(e->{
 			if(isFinished[0] == false) {
@@ -109,7 +114,7 @@ public class Test extends Application {
 							currentLevel.incrementLevelsFinished();
 							circlePathTransition = new PathTransition();
 							circlePathTransition.setPath(CircleAnimation.returnCirclePath(currentPathTileArray,all_tiles));
-							circlePathTransition.setNode(gameCircle);
+							circlePathTransition.setNode(gameBall);
 							circlePathTransition.setCycleCount(1);
 							circlePathTransition.setDuration(Duration.seconds(((Path)circlePathTransition.getPath()).getElements().size() / BALL_SPEED));
 							circlePathTransition.autoReverseProperty();
@@ -139,7 +144,7 @@ public class Test extends Application {
 		}
 	}
 	public static void setLevel(Level currentLevel) {
-		Test.currentLevel = currentLevel;
+		Game.currentLevel = currentLevel;
 	}
 	public void stopAnimation() {
 		circlePathTransition.pause();
@@ -148,7 +153,7 @@ public class Test extends Application {
 		return actualStage;
 	}
 	protected static void setReturnToMainMenu(Button returnToMainMenu) {
-		Test.returnToMainMenu = returnToMainMenu;
+		Game.returnToMainMenu = returnToMainMenu;
 	}
 	public void setGridPane(GridPane gridPane, ArrayList<Tile> tiles) throws FileNotFoundException {
 		for(int i=0;i<tiles.size();i++) {

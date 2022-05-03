@@ -11,7 +11,7 @@ public class CircleAnimation {
 
 		int startingDirection = Integer.parseInt(findDirectionString(tileArray.get(0))) == 1 ? 3 : 2;
 		int currentIndex = all_tiles.indexOf(tileArray.get(0));
-		returnPath.getElements().add(new MoveTo((currentIndex % 4) * 150 + 72,(currentIndex / 4) * 150 + 75));
+		returnPath.getElements().add(new MoveTo((currentIndex % 4) * 150 + 72,(currentIndex / 4) * 150 + 78));
 		for(int i = 0; i < tileArray.size() - 1; i++) {
 			currentTile = tileArray.get(i);
 			currentTileString = findDirectionString(currentTile);
@@ -58,7 +58,7 @@ public class CircleAnimation {
 			}
 		/*Its not starting direction,just reusing variables,will be fixed later on*/
 			startingDirection = all_tiles.indexOf(tileArray.get(tileArray.size()-1));
-		returnPath.getElements().add(new LineTo(150 * (startingDirection % 4) + 75.0,150 * (startingDirection / 4) +75.0));
+		returnPath.getElements().add(new LineTo(150 * (startingDirection % 4) + 72.0,150 * (startingDirection / 4) + 78.0));
 		return returnPath;	
 	}
 	
@@ -75,7 +75,7 @@ public class CircleAnimation {
 			double[] coordinates = directionToCoordinateTranslation(direction);
 			int currentIndex = all_tiles.indexOf(currentTile);
 			if(length == 2)
-				return new ArcTo(75,75,0,150 * (currentIndex % 4) + coordinates[0],150 * (currentIndex / 4) + coordinates[1],false,sweepFlag);
+				return new ArcTo(80,80,0,150 * (currentIndex % 4) + coordinates[0],150 * (currentIndex / 4) + coordinates[1],false,sweepFlag);
 			else 
 				return new LineTo(150 * (currentIndex % 4) + coordinates[0],150 * (currentIndex / 4) + coordinates[1]);
 		
@@ -107,17 +107,17 @@ public class CircleAnimation {
 	public static double[] directionToCoordinateTranslation(int direction) {
 		double[] coordinates = new double[2];
 		switch(direction) {
-		case 1 : coordinates[0] = 75;
+		case 1 : coordinates[0] = 72;
 			coordinates[1] = 0;
 			break;
 		case 2 : coordinates[0] = 150;
-		coordinates[1] = 75; 
+		coordinates[1] = 78; 
 			break;
-		case 3 : coordinates[0] = 75;
+		case 3 : coordinates[0] = 72;
 		coordinates[1] = 150;
 			break;
 		case 4 : coordinates[0] = 0;
-		coordinates[1] = 75;
+		coordinates[1] = 78;
 			break;
 			
 		}

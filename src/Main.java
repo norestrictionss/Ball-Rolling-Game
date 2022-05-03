@@ -36,14 +36,14 @@ public class Main extends Application {
 		credits.setFont(new Font(20));
 		setToMainMenu();
 		returnToMainMenu.setTranslateX(300);
-		Test.setReturnToMainMenu(returnToMainMenu);
+		Game.setReturnToMainMenu(returnToMainMenu);
 		credits.setOnAction(openCredits -> {
 			if(isContributionClosed) {
 			isContributionClosed = false;
 			Stage creditsStage = new Stage();
 			Pane creditsPane = new Pane();
-			Text contributorNames = new Text("\n\tName\nFurkan GÖKGÖZ\nBarýþ Something");
-			Text contributorNumbers = new Text ("\nSchool Number\n  150120076\n  Somenumber");
+			Text contributorNames = new Text("\n\tName\nname1 \nsname2");
+			Text contributorNumbers = new Text ("\nSchool Number\n  number1\n  number2");
 			contributorNumbers.setTranslateX(200);
 			creditsPane.setStyle("-fx-background-color:#AF5525;");
 			creditsPane.setPrefSize(300,100);
@@ -63,14 +63,14 @@ public class Main extends Application {
 			if(isContributionClosed) {
 		Button previousLevel;
 		Button nextLevel;
-		Test gameTest = new Test();
-		Test.setLevel(currentLevel);
+		Game game = new Game();
+		Game.setLevel(currentLevel);
 		try {
-			gameTest.start(mainStage);
+			game.start(mainStage);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
-		mainStage = Test.getGameStage();
+		mainStage = Game.getGameStage();
 		mainScene = mainStage.getScene();
 		HBox buttonBox = ((HBox)((BorderPane)mainScene.getRoot()).getCenter());
 		previousLevel = (Button)buttonBox.getChildren().get(0);
@@ -80,8 +80,8 @@ public class Main extends Application {
 			if(currentLevel.getId() > 1) {
 				try {
 				currentLevel.decrementId();	
-				gameTest.start(Test.getGameStage());
-				gameTest.stopAnimation();
+				game.start(Game.getGameStage());
+				game.stopAnimation();
 				}
 				catch(Exception epic) {
 					
@@ -92,9 +92,9 @@ public class Main extends Application {
 			try {
 				
 			if(currentLevel.getId() < currentLevel.getTotalLevels() && currentLevel.getId() <= currentLevel.getLevelsFinished()) {
-				gameTest.stopAnimation();
+				game.stopAnimation();
 				currentLevel.incrementId();
-				gameTest.start(Test.getGameStage());			
+				game.start(Game.getGameStage());			
 			}
 			}
 			catch(Exception epic) {
@@ -114,9 +114,8 @@ public class Main extends Application {
 		tileGridGame.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 33));
 		tileGridGame.setFill(Color.SANDYBROWN);
 		tileGridGame.setStroke(Color.BLACK);
-		ImageView background = new ImageView(new Image("file:Background.png",400,400,true,true));
 		mainMenuPane.setPrefSize(400,400);
-		mainMenuPane.getChildren().addAll(background,startGame,tileGridGame,credits);
+		mainMenuPane.getChildren().addAll(FileReader.getBackground(),startGame,tileGridGame,credits);
 		mainScene = new Scene(mainMenuPane);
 		mainStage.setScene(mainScene);
 		
@@ -124,10 +123,10 @@ public class Main extends Application {
 	public static void getToNextLevel() {
 		try {
 			if(currentLevel.getId() < currentLevel.getTotalLevels() && currentLevel.getId() <= currentLevel.getLevelsFinished()) {
-			Test newGame = new Test();
+				Game newGame = new Game();
 			currentLevel.incrementId();
 			newGame.stopAnimation();
-			newGame.start(Test.getGameStage());	
+			newGame.start(Game.getGameStage());	
 		}
 		}
 		catch (Exception exception) {
