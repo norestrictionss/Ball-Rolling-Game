@@ -26,14 +26,14 @@ public class Main extends Application {
 	private static Level currentLevel = new Level(1);
 	@Override
 	public void start(Stage primaryStage){
-		startGame.setLayoutX(144);
-		startGame.setLayoutY(126);
+		startGame.setLayoutX(160);
+		startGame.setLayoutY(200);
 		startGame.setStyle("-fx-background-color:#AF5525;");
-		credits.setLayoutX(160);
-		credits.setLayoutY(180);
+		credits.setLayoutX(215);
+		credits.setLayoutY(320);
 		credits.setStyle("-fx-background-color:#AF5525;");
-		startGame.setFont(new Font(20));
-		credits.setFont(new Font(20));
+		startGame.setFont(new Font(45));
+		credits.setFont(new Font(40));
 		setToMainMenu();
 		returnToMainMenu.setTranslateX(300);
 		Game.setReturnToMainMenu(returnToMainMenu);
@@ -42,8 +42,8 @@ public class Main extends Application {
 			isContributionClosed = false;
 			Stage creditsStage = new Stage();
 			Pane creditsPane = new Pane();
-			Text contributorNames = new Text("\n\tName\nname1 \nsname2");
-			Text contributorNumbers = new Text ("\nSchool Number\n  number1\n  number2");
+			Text contributorNames = new Text("\n\tName\nBarýþ Giray AKMAN \n Furkan GÖKGÖZ");
+			Text contributorNumbers = new Text ("\nSchool Number\n  150121822\n  150120076");
 			contributorNumbers.setTranslateX(200);
 			creditsPane.setStyle("-fx-background-color:#AF5525;");
 			creditsPane.setPrefSize(300,100);
@@ -110,11 +110,11 @@ public class Main extends Application {
 }	
 	public void setToMainMenu() {
 		Pane mainMenuPane = new Pane();
-		Text tileGridGame = new Text(100,66,"Tile Grid Game");
-		tileGridGame.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 33));
+		Text tileGridGame = new Text(50,100,"Tile Grid Game");
+		tileGridGame.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 75));
 		tileGridGame.setFill(Color.SANDYBROWN);
 		tileGridGame.setStroke(Color.BLACK);
-		mainMenuPane.setPrefSize(400,400);
+		mainMenuPane.setPrefSize(600,625);
 		mainMenuPane.getChildren().addAll(FileReader.getBackground(),startGame,tileGridGame,credits);
 		mainScene = new Scene(mainMenuPane);
 		mainStage.setScene(mainScene);

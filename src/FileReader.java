@@ -30,7 +30,7 @@ public class FileReader {
 		return ballTemplate;
 	}
 	public static ImageView getBackground() {
-		return new ImageView(new Image("file:Background.png",400,400,true,true));
+		return new ImageView(new Image("file:Background.png",600,630,true,true));
 	}
 	public ArrayList<Tile> start_reading() throws FileNotFoundException{
 		int id=1;
@@ -41,19 +41,19 @@ public class FileReader {
 		  arguments=(input.nextLine()).split(",");
 		  Tile starter=null;
 		  if(arguments.length!=1) {
-			if(arguments[1].equals("Starter")){
-				if(arguments[2].equals("Vertical")) {
+			if(arguments[1].equalsIgnoreCase("Starter")){
+				if(arguments[2].equalsIgnoreCase("Vertical")) {
 					starter=new Starter(id, "Vertical", new ImageView(new Image("file:Starter1.png")));
 				}
-				else if(arguments[2].equals("Horizontal")) {
+				else if(arguments[2].equalsIgnoreCase("Horizontal")) {
 					starter=new Starter(id, "Horizontal", new ImageView(new Image("file:Starter2.png")));
 				}
 				all_tiles.add(starter);
 				
 			}
-			else if(arguments[1].equals("Empty")) {
+			else if(arguments[1].equalsIgnoreCase("Empty")) {
 				Tile empty=null;
-				if(arguments[2].equals("Free")) {
+				if(arguments[2].equalsIgnoreCase("Free")) {
 					empty=new Free(id, "Free", new ImageView(new Image("file:Free.png")));
 				}
 				else {
@@ -61,59 +61,59 @@ public class FileReader {
 				}
 				all_tiles.add(empty);
 			}
-			else if(arguments[1].equals("Pipe")) {
+			else if(arguments[1].equalsIgnoreCase("Pipe")) {
 				Tile pipe=null;
-				if(arguments[2].equals("Vertical")) {
+				if(arguments[2].equalsIgnoreCase("Vertical")) {
 					pipe=new Pipe(id, "Vertical", new ImageView(new Image("file:Pipe1.png")));
 				}
-				else if(arguments[2].equals("Horizontal")) {
+				else if(arguments[2].equalsIgnoreCase("Horizontal")) {
 					pipe=new Pipe(id, "Horizontal", new ImageView(new Image("file:Pipe2.png")));
 
 				}
-				else if(arguments[2].equals("00")) {
+				else if(arguments[2].equalsIgnoreCase("00")) {
 					pipe=new Pipe(id, "00", new ImageView(new Image("file:00.png")));
 				}
-				else if(arguments[2].equals("01")) {
+				else if(arguments[2].equalsIgnoreCase("01")) {
 					pipe=new Pipe(id, "01", new ImageView(new Image("file:01.png")));
 				}
-				else if(arguments[2].equals("10")) {
+				else if(arguments[2].equalsIgnoreCase("10")) {
 					pipe=new Pipe(id, "10", new ImageView(new Image("file:10.png")));
 
 				}
-				else if(arguments[2].equals("11")) {
+				else if(arguments[2].equalsIgnoreCase("11")) {
 					pipe=new Pipe(id, "11", new ImageView(new Image("file:11.png")));
 				}
 				all_tiles.add(pipe);
 			}	
-			else if(arguments[1].equals("PipeStatic")) {
+			else if(arguments[1].equalsIgnoreCase("PipeStatic")) {
 				Tile pipeStatic=null;
-				if(arguments[2].equals("Vertical")) {
+				if(arguments[2].equalsIgnoreCase("Vertical")) {
 					pipeStatic=new PipeStatic(id, "Vertical", new ImageView(new Image("file:PipeStatic1.png")));
 				}
-				else if(arguments[2].equals("Horizontal")) {
+				else if(arguments[2].equalsIgnoreCase("Horizontal")) {
 					pipeStatic=new PipeStatic(id, "Horizontal", new ImageView(new Image("file:PipeStatic2.png")));
 				}
-				else if(arguments[2].equals("00")) {
+				else if(arguments[2].equalsIgnoreCase("00")) {
 					pipeStatic=new PipeStatic(id, "00", new ImageView(new Image("file:Static00.png")));
 				}
-				else if(arguments[2].equals("01")) {
+				else if(arguments[2].equalsIgnoreCase("01")) {
 					pipeStatic=new PipeStatic(id, "01", new ImageView(new Image("file:Static01.png")));
 				}
-				else if(arguments[2].equals("10")) {
+				else if(arguments[2].equalsIgnoreCase("10")) {
 					pipeStatic=new PipeStatic(id, "10", new ImageView(new Image("file:Static10.png")));
 				}
-				else if(arguments[2].equals("11")) {
+				else if(arguments[2].equalsIgnoreCase("11")) {
 					pipeStatic=new Pipe(id, "11", new ImageView(new Image("file:Static11.png")));
 				}
 				
 				all_tiles.add(pipeStatic);
 			}
-			else if(arguments[1].equals("End")) {
+			else if(arguments[1].equalsIgnoreCase("End")) {
 				Tile end=null;
-				if(arguments[2].equals("Vertical")) {
+				if(arguments[2].equalsIgnoreCase("Vertical")) {
 					end=new End(id, "Vertical", new ImageView(new Image("file:End1.png")));
 				}
-				else if(arguments[2].equals("Horizontal")) {
+				else if(arguments[2].equalsIgnoreCase("Horizontal")) {
 					end=new End(id, "Horizontal", new ImageView(new Image("file:End2.png")));
 				}
 				all_tiles.add(end);
