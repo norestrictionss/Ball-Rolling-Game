@@ -71,18 +71,8 @@ public class CircleAnimation {
 		return returnPath;	
 	}
 	
-	public static int directionCorrespondence(int direction) {
-		/*Finds the direction at the opposite of the direction given*/
-		switch (direction) {
-		case 1 : return 3;
-		case 2 : return 4;
-		case 3 : return 1;
-		case 4 : return 2;
-		default : return 0;
-		}
-	}
 	/*Returns ArcTo or LineTo accordingly*/
-	public static PathElement findTilePath(Tile currentTile,int direction,int length,boolean sweepFlag,ArrayList<Tile> all_tiles) {
+	private static PathElement findTilePath(Tile currentTile,int direction,int length,boolean sweepFlag,ArrayList<Tile> all_tiles) {
 		/*Change coordinates for the tile.*/
 			double[] coordinates = directionToCoordinateTranslation(direction);
 			/*Finds the index of the tile*/
@@ -96,7 +86,7 @@ public class CircleAnimation {
 		
 	}
 	/*Finds the numbers for direction from filename*/
-	public static String findDirectionString(Tile tile) {
+	private static String findDirectionString(Tile tile) {
 		/*Getting the filename*/
 		String urlString = tile.getImage().getImage().getUrl();
 			/*Variables*/
@@ -122,7 +112,7 @@ public class CircleAnimation {
 			
 	}
 	/*Purpose of it is to find the middle of any of it's sides according to direction*/
-	public static double[] directionToCoordinateTranslation(int direction) {
+	private static double[] directionToCoordinateTranslation(int direction) {
 		/*For saving the change of coordinates in a two sized array
 		 * X for 0th index
 		 * Y for 1st index*/
