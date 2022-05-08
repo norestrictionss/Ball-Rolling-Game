@@ -3,6 +3,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -17,8 +18,8 @@ import javafx.scene.control.Button;
 
 /* PROJECT NAME: TILE GRID GAME 
    CONTRIBUTORS
-   STUDENT NAME: BARIÞ GÝRAY AKMAN -> STUDENT ID: 150121822
-   STUDENT NAME: FURKAN GÖKGÖZ-> STUDENT ID: 150120076 
+   STUDENT NAME: BARIÅž GÄ°RAY AKMAN -> STUDENT ID: 150121822
+   STUDENT NAME: FURKAN GÃ–KGÃ–Z-> STUDENT ID: 150120076 
    PURPOSE OF THAT PROGRAM IS SOLVING THE PUZZLE AND HAVING THE BALL MOVED 
    IF THE PUZZLE HAS BEEN SET IN CORRECT COMBINATION.
    */
@@ -55,7 +56,7 @@ public class Main extends Application {
 			isContributionClosed = false;
 			Stage creditsStage = new Stage();
 			Pane creditsPane = new Pane();
-			Text contributorNames = new Text("\n\tName\nBarýþ Giray AKMAN \n Furkan GÖKGÖZ");
+			Text contributorNames = new Text("\n\tName\nBarÄ±ÅŸ Giray AKMAN \n Furkan GÃ–KGÃ–Z");
 			Text contributorNumbers = new Text ("\nSchool Number\n  150121822\n  150120076");
 			contributorNumbers.setTranslateX(200);
 			creditsPane.setStyle("-fx-background-color:#AF5525;");
@@ -102,7 +103,7 @@ public class Main extends Application {
 				try {
 				currentLevel.decrementId();	
 				game.start(Game.getGameStage());
-				game.stopAnimation();
+				Game.stopAnimation();
 				}
 				catch(Exception epic) {
 					
@@ -115,7 +116,7 @@ public class Main extends Application {
 			try {
 				
 			if(new File("CSE1242_spring2022_project_level" + (currentLevel.getId()+1 )+ ".txt").exists() && currentLevel.getId() <= currentLevel.getLevelsFinished()) {
-				game.stopAnimation();
+				Game.stopAnimation();
 				currentLevel.incrementId();
 				game.start(Game.getGameStage());			
 			}
