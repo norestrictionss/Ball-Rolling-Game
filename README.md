@@ -12,7 +12,7 @@ The project is compatible with JDK 10.0.2.
 
 
 ### How to Run the Project?
-Executing Main.java will be sufficient for this.
+Executing Main.java will be sufficient for this. Then, the screen for the game will pop up.
 
 ### Screenshots From the Game
 Unfortunately, I won't be able to upload screenshots of all levels. Game includes 10 levels.
