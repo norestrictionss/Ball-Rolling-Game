@@ -8,6 +8,8 @@ Eventually, ball rolls through the path and level is completed.
 ### Prerequisites
 JavaFX must be installed to execute the project.
 
+### How to Run the Project?
+Executing Main.java will be sufficient for this.
 
 
 
