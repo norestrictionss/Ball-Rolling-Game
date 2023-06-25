@@ -8,6 +8,8 @@ Eventually, ball rolls through the path and level is completed. Levels are getti
 ### Prerequisites
 JavaFX must be installed to execute the project.
 Executing the project via Eclipse Photon IDE will be better to avoid the problems.
+The project is compatible with JDK 10.0.2. 
+
 
 ### How to Run the Project?
 Executing Main.java will be sufficient for this.
