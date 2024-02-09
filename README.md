@@ -1,4 +1,4 @@
-# Puzzle-Game
+# Ball-Rolling-Game
 
 ### About The Project
 Ball Rolling Game is JavaFX-based puzzle game. The main purpose in the game is locating the tiles in a true manner and creating the path for the ball to roll it.
