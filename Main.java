@@ -18,8 +18,8 @@ import javafx.scene.control.Button;
 
 /* PROJECT NAME: TILE GRID GAME 
    CONTRIBUTORS
-   STUDENT NAME: BARIÞ GÝRAY AKMAN -> STUDENT ID: 150121822
-   STUDENT NAME: FURKAN GÖKGÖZ-> STUDENT ID: 150120076 
+   STUDENT NAME: BARIï¿½ Gï¿½RAY AKMAN -> STUDENT ID: 150121822
+   STUDENT NAME: FURKAN Gï¿½KGï¿½Z-> STUDENT ID: 150120076 
    PURPOSE OF THAT PROGRAM IS SOLVING THE PUZZLE AND HAVING THE BALL MOVED 
    IF THE PUZZLE HAS BEEN SET IN CORRECT COMBINATION.
    */
@@ -56,7 +56,7 @@ public class Main extends Application {
 			isContributionClosed = false;
 			Stage creditsStage = new Stage();
 			Pane creditsPane = new Pane();
-			Text contributorNames = new Text("\n\tName\nBarýþ Giray AKMAN \n Furkan GÖKGÖZ");
+			Text contributorNames = new Text("\n\tName\nBarï¿½ï¿½ Giray AKMAN \n Furkan Gï¿½KGï¿½Z");
 			Text contributorNumbers = new Text ("\nSchool Number\n  150121822\n  150120076");
 			contributorNumbers.setTranslateX(200);
 			creditsPane.setStyle("-fx-background-color:#AF5525;");
